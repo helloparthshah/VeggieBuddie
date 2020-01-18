@@ -133,7 +133,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     /* String text = visionText.text; */
     String text="";
     int flag=0;
-    var nv={"carmine","carminic acid","cochineal","dripping","gelatin","hi-vegi-lip","hydrogenated tallow","isinglass","keratin","lard","lard oil","pancreatic extract","pancreatin","pepsin","pork fat","pork oil","suet","tallow","tallow flakes","trypsin"};
+    var nv={" carmine","carminic acid","cochineal","dripping","gelatin","hi-vegi-lip","hydrogenated tallow","isinglass","keratin","lard","lard oil","pancreatic extract","pancreatin","pepsin","pork fat","pork oil","suet","tallow","tallow flakes","trypsin"};
     String newStr;
     
     for (TextBlock block in visionText.blocks) 
