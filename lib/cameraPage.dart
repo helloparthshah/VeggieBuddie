@@ -149,7 +149,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
 
     String status="The product is Vegetarian!";
     if (flag==1)
-    status="The product is Non-Vegitarian!";
+    status="The product is Non-Vegetarian!";
 
     showDialog(
       context: context,
