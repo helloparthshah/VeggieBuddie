@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "296292818724",
+    "firebase_url": "https://veggie-buddie.firebaseio.com",
+    "project_id": "veggie-buddie",
+    "storage_bucket": "veggie-buddie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296292818724:android:a58e2ed2dc5c4bb8f39db1",
+        "android_client_info": {
+          "package_name": "com.android.VeggieBuddie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296292818724-rgps6mkfu0bjarss0b0oe0p4d3tg0cd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0rxdlYiPA1X-U9weUKp59tOkXdvOM_fs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296292818724-rgps6mkfu0bjarss0b0oe0p4d3tg0cd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
