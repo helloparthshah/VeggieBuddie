@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:flutter/services.dart';
 
 List<CameraDescription> cameras;
 
@@ -44,22 +45,17 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       backgroundColor: Colors.black,
       key: _scaffoldKey,
-      body: Column(
-        children: <Widget>[
-          Expanded(
+      body: Container(
             child: Container(
                 child: Center(
                   child: _cameraPreviewWidget(),
                 ),
               ),
             ),
-          
-          _captureControlRowWidget(),
-        ],
-      ),
     );
   }
 
@@ -75,29 +71,32 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
         ),
       );
     } else {
-      return AspectRatio(
+      return Container(
+        height: MediaQuery.of(context).size.height, 
+        width: MediaQuery.of(context).size.width/controller.value.aspectRatio,
+      child:AspectRatio(
         aspectRatio: controller.value.aspectRatio,
-        child: CameraPreview(controller),
-      );
-    }
-  }
-
-  /// Display the control bar with buttons to take pictures.
-  Widget _captureControlRowWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.camera_alt),
-          color: Colors.white,
+        child: Container(
+          child: Stack(
+            children: <Widget>[
+              CameraPreview(controller),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child:FloatingActionButton(
+          child: Icon(Icons.camera_alt,color: Colors.black,),
+          backgroundColor: Colors.white,
           onPressed: controller != null &&
                   controller.value.isInitialized 
               ? onTakePictureButtonPressed
               : null,
         )
-      ],
-    );
+        )
+            ]
+          )
+          )
+      )
+      );
+    }
   }
 
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
