@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:VeggieBuddie/cameraPage.dart';
+import 'package:VeggieBuddie/loginPage.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -49,5 +52,5 @@ Future<void> main() async {
   } on CameraException catch (e) {
     logError(e.code, e.description);
   }
-  runApp(Home());
+  runApp(LoginPage());
 }
