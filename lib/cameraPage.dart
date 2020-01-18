@@ -28,7 +28,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
   @override
   void initState() {
     super.initState();
-    controller = CameraController(cameras[0], ResolutionPreset.medium);
+    controller = CameraController(cameras[0], ResolutionPreset.ultraHigh);
     controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -72,8 +72,8 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       );
     } else {
       return Container(
-        height: MediaQuery.of(context).size.height, 
-        width: MediaQuery.of(context).size.width/controller.value.aspectRatio,
+        /* height: MediaQuery.of(context).size.height,  */
+        /* width: MediaQuery.of(context).size.width/controller.value.aspectRatio, */
       child:AspectRatio(
         aspectRatio: controller.value.aspectRatio,
         child: Container(
@@ -147,9 +147,9 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       text=text+"\n";
     }
 
-    String status="The product is veg";
+    String status="The product is Vegetarian!";
     if (flag==1)
-    status="The product is non-veg";
+    status="The product is Non-Vegitarian!";
 
     showDialog(
       context: context,

@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:VeggieBuddie/cameraPage.dart';
 
-class TabLayoutDemo extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -49,5 +49,5 @@ Future<void> main() async {
   } on CameraException catch (e) {
     logError(e.code, e.description);
   }
-  runApp(TabLayoutDemo());
+  runApp(Home());
 }
