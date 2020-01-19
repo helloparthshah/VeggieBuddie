@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/services.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -173,36 +174,35 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       text=text+"\n";
       }
     String status = "The ingredients could not be detected!";
-    if (nvFlag==1)
+      String filegif = "";
+    if (nvFlag==1) {
       status="The product is Non-Vegetarian!";
-    else if(vegFlag == 1)
+      filegif = "gifs/nonveg.gif";
+    }
+    else if(vegFlag == 1){
       status = "The product is Vegetarian!";
-    else if(veganFlag == 1)
+      filegif = "gifs/vegetarians.gif"; }
+    else if(veganFlag == 1){
       status = "The product is Vegan!";
+      filegif = "gifs/veganPower.gif";}
 
- /*       showDialog(
+        showDialog(
           context: context,
             builder: (_) => AssetGiffyDialog(
-            imagePath:"https://raw.githubusercontent.com/Shashank02051997/
-            FancyGifDialog-Android/master/GIF's/gif14.gif",
+            image: Image.asset(filegif, fit: BoxFit.cover),
             title: new Text(status,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 22.0,
-                fontWeight: FontWeight.w600),)
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                    Navigator.of(context).pop();
-  },
-        ),
-            ]),
-          )
-*/
+                fontWeight: FontWeight.w600),),
+            onlyOkButton: true,
+           onOkButtonPressed: () {}));
 
 
-showDialog(context: context,
+
+
+
+/*showDialog(context: context,import 'package:giffy_dialog/giffy_dialog.dart';
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text(status),
@@ -218,7 +218,7 @@ showDialog(context: context,
         );
       },
     );
-
+*/
     /* _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(text))); */
     textRecognizer.close();
   }
