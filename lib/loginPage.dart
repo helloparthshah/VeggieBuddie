@@ -8,8 +8,8 @@ final databaseReference = FirebaseDatabase.instance.reference();
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
-String name = "Guest";
-String email = "guest@veggiebuddie.com";
+String name;
+String email;
 String imageUrl = "http://pluspng.com/img-png/google-logo-png-open-2000.png";
 
 Future<String> signInWithGoogle() async {
@@ -47,8 +47,6 @@ Future<String> signInWithGoogle() async {
 
 void signOutGoogle() async {
   await googleSignIn.signOut();
-  name = "Guest";
-  email = "guest@veggiebuddie.com";
   print("User Sign Out");
 }
 
@@ -124,6 +122,8 @@ class _LoginPageState extends State<LoginPage> {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () async {
+        name = "Guest";
+        email = "guest@veggiebuddie.com";
         await createRecord();
         runApp(Home());
       },
@@ -153,20 +153,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future createRecord() async {
-    var test,food;
-    databaseReference.once().then((DataSnapshot snapshot) {
-      test=snapshot.value[name]['name'];
+      databaseReference.child(name).update({
+          'name': name,
+          'email': email,
     });
-    if(test==name)
-    databaseReference.once().then((DataSnapshot snapshot) {
-      food=snapshot.value[name]['food'];
-    });
-    databaseReference.once().then((DataSnapshot snapshot) {
+    /* databaseReference.once().then((DataSnapshot snapshot) {
         databaseReference.child(name).set({
           'name': name,
           'email': email,
-          'food':food
         });
-    });
+    }); */
   }
 }
