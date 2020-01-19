@@ -157,11 +157,5 @@ class _LoginPageState extends State<LoginPage> {
           'name': name,
           'email': email,
     });
-    /* databaseReference.once().then((DataSnapshot snapshot) {
-        databaseReference.child(name).set({
-          'name': name,
-          'email': email,
-        });
-    }); */
   }
 }
