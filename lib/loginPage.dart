@@ -2,16 +2,20 @@ import 'package:VeggieBuddie/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+final databaseReference = FirebaseDatabase.instance.reference();
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
-String name="Guest";
-String email="guest@veggiebuddie.com";
-String imageUrl="http://pluspng.com/img-png/google-logo-png-open-2000.png";
+String name = "Guest";
+String email = "guest@veggiebuddie.com";
+String imageUrl = "http://pluspng.com/img-png/google-logo-png-open-2000.png";
 
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-  final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+  final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
 
   final AuthCredential credential = GoogleAuthProvider.getCredential(
     accessToken: googleSignInAuthentication.accessToken,
@@ -35,15 +39,16 @@ Future<String> signInWithGoogle() async {
   email = user.email;
   imageUrl = user.photoUrl;
   if (name.contains(" ")) {
-   name = name.substring(0, name.indexOf(" "));
-}
+    name = name.substring(0, name.indexOf(" "));
+  }
 
   return 'signInWithGoogle succeeded: $user';
 }
 
-void signOutGoogle() async{
+void signOutGoogle() async {
   await googleSignIn.signOut();
-
+  name = "Guest";
+  email = "guest@veggiebuddie.com";
   print("User Sign Out");
 }
 
@@ -66,12 +71,12 @@ class _LoginPageState extends State<LoginPage> {
               FlutterLogo(size: 150),
               SizedBox(height: 50),
               Directionality(
-              textDirection: TextDirection.ltr,
-              child:_signInButton(),
+                textDirection: TextDirection.ltr,
+                child: _signInButton(),
               ),
               Directionality(
-              textDirection: TextDirection.ltr,
-              child:_signInAsGuestButton(),
+                textDirection: TextDirection.ltr,
+                child: _signInAsGuestButton(),
               )
             ],
           ),
@@ -83,11 +88,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _signInButton() {
     return OutlineButton(
       splashColor: Colors.grey,
-      onPressed: () {
-      signInWithGoogle().whenComplete(() {
-              runApp(Home());
-      });
-    },
+      onPressed: () async {
+        signInWithGoogle().whenComplete(() {
+          createRecord();
+          runApp(Home());
+        });
+      },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
       borderSide: BorderSide(color: Colors.grey),
@@ -113,12 +119,14 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
   Widget _signInAsGuestButton() {
     return OutlineButton(
       splashColor: Colors.grey,
-      onPressed: () {
-              runApp(Home());
-    },
+      onPressed: () async {
+        await createRecord();
+        runApp(Home());
+      },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
       borderSide: BorderSide(color: Colors.grey),
@@ -142,5 +150,23 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future createRecord() async {
+    var test,food;
+    databaseReference.once().then((DataSnapshot snapshot) {
+      test=snapshot.value[name]['name'];
+    });
+    if(test==name)
+    databaseReference.once().then((DataSnapshot snapshot) {
+      food=snapshot.value[name]['food'];
+    });
+    databaseReference.once().then((DataSnapshot snapshot) {
+        databaseReference.child(name).set({
+          'name': name,
+          'email': email,
+          'food':food
+        });
+    });
   }
 }
