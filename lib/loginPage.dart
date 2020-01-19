@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 20),
               Directionality(
                 textDirection: TextDirection.ltr,
-              child:Text("VeggieBuddie",style: TextStyle(fontFamily: 'Roboto', fontSize: 40,color: Colors.green[200],fontWeight: FontWeight.w900,),),
+              child:Text("VeggieBuddie",style: TextStyle(fontSize: 40,color: Colors.green[200],fontWeight: FontWeight.w900,),),
               ),
               SizedBox(height: 50),
               Directionality(

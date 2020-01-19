@@ -25,6 +25,7 @@ dependencies:
   google_sign_in: ^4.1.1
   firebase_database: ^3.1.1
   giffy_dialog: ^1.7.0
+  google_fonts: ^0.3.2
 
 
   flutter:
@@ -62,6 +63,7 @@ flutter:
     - lists/
     - lists/allergens/
     - gifs/
+    - google_fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -74,16 +76,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-     - family: Roboto
-       fonts:
-        - asset: fonts/Roboto/Roboto-Regular.ttf
-        - asset: fonts/Roboto/Roboto-Italic.ttf
-          style: italic
-        - asset: fonts/Roboto/Roboto-Bold.ttf
-          weight: 700
-        - asset: fonts/Roboto/Roboto-Light.ttf
-          weight: 100
+  # fonts:
+  #    - family: Roboto
+  #      fonts:
+  #       - asset: fonts/Roboto/Roboto-Regular.ttf
+  #       - asset: fonts/Roboto/Roboto-Italic.ttf
+  #         style: italic
+  #       - asset: fonts/Roboto/Roboto-Bold.ttf
+  #         weight: 700
+  #       - asset: fonts/Roboto/Roboto-Light.ttf
+  #         weight: 100
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -58,19 +58,20 @@ class ProfilePage extends State<Profile> {
                   colors: [Colors.blue[400], Colors.blue[100]],
                 ),
               ),
-              child: Center(
+              child: Container(
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
+                      /* mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max, */
                       children: <Widget>[
+                        SizedBox(height: 20),
                     CircleAvatar(
                       backgroundImage: NetworkImage(
                         imageUrl,
                       ),
-                      radius: 60,
+                      radius: 50,
                       backgroundColor: Colors.transparent,
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
                     Text(
                       'NAME',
                       style: TextStyle(
@@ -85,7 +86,7 @@ class ProfilePage extends State<Profile> {
                           color: Colors.deepPurple,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Text(
                       'EMAIL',
                       style: TextStyle(
@@ -100,7 +101,7 @@ class ProfilePage extends State<Profile> {
                           color: Colors.deepPurple,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
                     RaisedButton(
                       onPressed: () {
                         signOutGoogle();
@@ -127,6 +128,7 @@ class ProfilePage extends State<Profile> {
                         children: values.keys.map(
                           (String key) {
                             return new CheckboxListTile(
+                              activeColor: Colors.deepPurple,
                               title: new Text(key),
                               value: values[key],
                               onChanged: (bool value) {
@@ -139,10 +141,11 @@ class ProfilePage extends State<Profile> {
                         ).toList(),
                       ),
                       Align(
-                          alignment: Alignment.bottomRight,
+                          alignment: Alignment.bottomCenter,
                           child: Padding(
                             padding: EdgeInsets.all(20),
                             child: FloatingActionButton(
+                              backgroundColor: Colors.deepPurple,
                               onPressed: () async {
                                 await createRecord();
                               },
