@@ -11,7 +11,7 @@ import 'package:VeggieBuddie/loginPage.dart';
 import 'package:VeggieBuddie/ProfilePage.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show DeviceOrientation, rootBundle;
 
 Future test() async{
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -30,6 +30,8 @@ Future<List<String>> getFileData(String path) async {
 class FlutterVisionHome extends StatefulWidget {
   @override
   _FlutterVisionHomeState createState() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return _FlutterVisionHomeState();
   }
 }
@@ -65,7 +67,6 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       backgroundColor: Colors.black,
       key: _scaffoldKey,
@@ -241,24 +242,6 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
             buttonCancelText: Text("Ok", style: TextStyle(fontSize: 18.0)),
             buttonCancelColor: Colors.blue,
            ));
-/*showDialog(context: context,import 'package:giffy_dialog/giffy_dialog.dart';
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: new Text(status),
-          content: new SingleChildScrollView(child: SelectableText(text)),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-*/
-    /* _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(text))); */
     textRecognizer.close();
   }
 
@@ -273,7 +256,6 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     final String filePath = '$dirPath/${timestamp()}.jpg';
 
     if (controller.value.isTakingPicture) {
-      // A capture is already pending, do nothing.
       return null;
     }
 

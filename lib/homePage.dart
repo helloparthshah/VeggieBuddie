@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:VeggieBuddie/cameraPage.dart';
 import 'package:VeggieBuddie/ProfilePage.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return new MaterialApp(
       color: Colors.yellow,
       home: DefaultTabController(
