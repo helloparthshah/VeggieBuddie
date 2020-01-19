@@ -294,3 +294,28 @@ vitamin E
 vitamin P complex
 yeast food
 zeaxanthin
+peanuts
+peanut
+peanut.
+almond
+pecan
+chestnut
+walnut
+macadamia nut
+cashew
+pistachio
+brazil nut
+pine nut
+pignolia nut
+filbert
+hazelnut
+argan nut
+beech nut
+ginkgo
+shea nut
+butter nut
+hickory
+chinquapin
+lychee nut
+coconut
+pili nut
