@@ -1,6 +1,7 @@
 import 'package:VeggieBuddie/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -58,13 +59,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Material(
       child: Container(
         decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.black, Colors.red[400]],
+                  colors: [Colors.teal[400], Colors.teal[200]],
                 ),
               ),
         child: Center(
@@ -73,10 +75,10 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image(image: AssetImage("images/icon.png"), height: 200.0),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Directionality(
                 textDirection: TextDirection.ltr,
-              child:Text("VeggieBuddie",style: TextStyle(fontSize: 40,color: Colors.grey[200],fontWeight: FontWeight.w900,),),
+              child:Text("VeggieBuddie",style: TextStyle(fontSize: 40,color: Colors.green[200],fontWeight: FontWeight.w900,),),
               ),
               SizedBox(height: 50),
               Directionality(
@@ -97,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _signInButton() {
     return OutlineButton(
-      splashColor: Colors.grey,
+      splashColor: Colors.white,
       onPressed: () async {
         await signInWithGoogle().whenComplete(() async{
           await createRecord();
@@ -106,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.black),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -120,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
             )
@@ -132,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _signInAsGuestButton() {
     return OutlineButton(
-      splashColor: Colors.grey,
+      splashColor: Colors.white,
       onPressed: () async {
         name = "Guest";
         email = "guest@veggiebuddie.com";
@@ -141,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.black),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -154,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in as Guest',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
             )

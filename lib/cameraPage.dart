@@ -103,15 +103,19 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
               CameraPreview(controller),
         Align(
           alignment: Alignment.bottomCenter,
-          child:FloatingActionButton(
+          child:Column(children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height-172),
+          FloatingActionButton(
           child: Icon(Icons.camera_alt,color: Colors.black,),
           backgroundColor: Colors.white,
           onPressed: controller != null &&
                   controller.value.isInitialized 
               ? onTakePictureButtonPressed
               : null,
-        )
-        )
+        ),
+        ]
+          )
+        ),
             ]
           )
           )
@@ -239,8 +243,8 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
                 fontWeight: FontWeight.w600),
                 ),
             onlyCancelButton: true,
-            buttonCancelText: Text("Ok", style: TextStyle(fontSize: 18.0)),
-            buttonCancelColor: Colors.blue,
+            buttonCancelText: Text("Ok", style: TextStyle(fontSize: 18.0,color: Colors.white)),
+            buttonCancelColor: Colors.teal[300],
            ));
     textRecognizer.close();
   }
