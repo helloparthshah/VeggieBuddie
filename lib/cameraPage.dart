@@ -197,8 +197,8 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
                 fontSize: 22.0,
                 fontWeight: FontWeight.w600),),
             onlyCancelButton: true,
-            buttonCancelText: Text("Ok"),
-            buttonCancelColor: Colors.green,
+            buttonCancelText: Text("Ok", style: TextStyle(fontSize: 18.0)),
+            buttonCancelColor: Colors.blue,
            ));
 
 

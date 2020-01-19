@@ -60,18 +60,30 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [Colors.black, Colors.red[400]],
+                ),
+              ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlutterLogo(size: 150),
+              Image(image: AssetImage("images/icon.png"), height: 200.0),
+              SizedBox(height: 10),
+              Directionality(
+                textDirection: TextDirection.ltr,
+              child:Text("VeggieBuddie",style: TextStyle(fontSize: 40,color: Colors.grey[200],fontWeight: FontWeight.w900,),),
+              ),
               SizedBox(height: 50),
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: _signInButton(),
               ),
+              SizedBox(height: 20),
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: _signInAsGuestButton(),
