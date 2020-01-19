@@ -137,9 +137,9 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     final VisionText visionText = await textRecognizer.processImage(visionImage);
     /* String text = visionText.text; */
     String text="";
-    int nv_flag=0;
-    int vegan_f = 0;
-    int veg_f = 0;
+    int nvFlag=0;
+    int veganFlag = 0;
+    int vegFlag = 0;
     String newStr;
     var nonVeg=await getFileData("lists/non-veg.txt");
     var vegan = await getFileData("lists/vegan.txt");
@@ -152,21 +152,21 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
           for(String nonv in nonVeg){
                   newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr==nonv){
-                        nv_flag=1;
+                        nvFlag=1;
                         break;
                     }
           }
           for(String veg in vegetarian) {
                   newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr == veg) {
-                    veg_f = 1;
+                    vegFlag = 1;
                     break;
                   }
           }
           for(String vega in vegan) {
                   newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr == vega)  {
-                    vegan_f = 1;
+                    veganFlag = 1;
                     break;
                   }
           }
@@ -175,11 +175,11 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       text=text+"\n";
       }
     String status="The product could not be detected!";
-    if (nv_flag==1)
+    if (nvFlag==1)
       status="The product is Non-Vegetarian!";
-    else if(veg_f == 1)
+    else if(vegFlag == 1)
       status = "The product is Vegetarian!";
-    else if(vegan_f == 1)
+    else if(veganFlag == 1)
       status = "The product is Vegan!";
 
  /*       showDialog(
