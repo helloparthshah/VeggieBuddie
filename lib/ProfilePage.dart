@@ -4,6 +4,23 @@ import 'package:firebase_database/firebase_database.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
+Map<String, bool> values = {
+    'Soybeans': false,
+    'Crustacean shellfish': false,
+    'Peanuts': false,
+    'Tree nuts': false,
+    'Fish': false,
+    'Wheat': false,
+    'Eggs': false,
+    'Milk': false,
+  };
+
+Future test() async{
+  databaseReference.once().then((DataSnapshot snapshot) {
+      values=Map<String,bool>.from(snapshot.value[name]['food']);
+    });
+}
+
 class Profile extends StatefulWidget {
   Profile({Key key, this.title}) : super(key: key);
   final String title;
@@ -11,18 +28,26 @@ class Profile extends StatefulWidget {
 }
 
 class ProfilePage extends State<Profile> {
-  Map<String, bool> values = {
-    'Milk': false,
-    'Eggs': false,
-    'Fish (bass, flounder, cod)': false,
-    'Crustacean shellfish (crab, lobster, shrimp)': false,
-    'Tree nuts (almonds, walnuts, pecans)': false,
-    'Peanuts': false,
-    'Wheat': false,
-    'Soybeans': false,
-  };
+  var _result;
+  @override
+  void initState() {
+    /* WidgetsBinding.instance.addPostFrameCallback((_) async {
+            await test();
+          }); */
+          test().then((result){
+            setState(() {
+                _result = result;
+            });
+            print("Data retrived");
+          });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    if(_result==null)
+    {
+      print("Loading...");
+    }
     return Stack(children: <Widget>[
       Container(
           child: Container(
@@ -130,8 +155,6 @@ class ProfilePage extends State<Profile> {
   }
 
   Future createRecord() async {
-    databaseReference.child(name).update({
-    'food': values
-  });
+    databaseReference.child(name).update({'food': values});
   }
 }
