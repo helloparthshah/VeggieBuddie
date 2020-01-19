@@ -146,7 +146,6 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFilePath(imagePath);
     final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
     final VisionText visionText = await textRecognizer.processImage(visionImage);
-    /* String text = visionText.text; */
     String text="";
     int nvFlag=0;
     int veganFlag = 0;
@@ -226,13 +225,13 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       filegif = "gifs/veganPower.gif";}
 
       if(alleFlag==1)
-      t="You are alergic to this";
+      t="You are alergic to this!";
 
         showDialog(
           context: context,
             builder: (_) => AssetGiffyDialog(
             image: Image.asset(filegif, fit: BoxFit.cover),
-            title: new Text(status+" "+t,
+            title: new Text(status+"\n"+t,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 22.0,
