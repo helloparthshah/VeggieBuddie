@@ -11,8 +11,9 @@ import 'package:flutter/services.dart' show rootBundle;
 
 List<CameraDescription> cameras;
 
-Future<String> getFileData(String path) async {
-  return await rootBundle.loadString(path);
+Future<List<String>> getFileData(String path) async {
+  var readLines = await rootBundle.loadString(path);
+  return readLines.split("\\n");
 }
 
 class FlutterVisionHome extends StatefulWidget {
@@ -136,13 +137,12 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     String text="";
     int flag=0;
     String newStr;
-    var nv={"lard","pork"};
     var nonVeg=await getFileData("lists/non-veg.txt");
-    print(type(nonVeg));
+    print(nonVeg);
     for (TextBlock block in visionText.blocks) 
     for (TextLine line in block.lines){
     for (TextElement element in line.elements){
-      for(String nonv in nv){
+      for(String nonv in nonVeg){
         newStr = element.text.replaceAll(",", "").toLowerCase();
       if(newStr==nonv){
         flag=1;
