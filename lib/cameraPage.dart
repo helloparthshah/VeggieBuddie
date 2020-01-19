@@ -7,9 +7,18 @@ import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/services.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:VeggieBuddie/homePage.dart';
+import 'package:VeggieBuddie/loginPage.dart';
+import 'package:VeggieBuddie/ProfilePage.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
+
+Future test() async{
+  final databaseReference = FirebaseDatabase.instance.reference();
+  databaseReference.once().then((DataSnapshot snapshot) {
+      values=Map<String,bool>.from(snapshot.value[name]['food']);
+    });
+}
 
 List<CameraDescription> cameras;
 
@@ -37,6 +46,8 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
   @override
   void initState() {
     super.initState();
+    test();
+    print(values);
     controller = CameraController(cameras[0], ResolutionPreset.ultraHigh);
     controller.initialize().then((_) {
       if (!mounted) {
@@ -140,10 +151,30 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     int nvFlag=0;
     int veganFlag = 0;
     int vegFlag = 0;
+    int alleFlag=0;
     String newStr;
+    String t="";
     var nonVeg=await getFileData("lists/non-veg.txt");
     var vegan = await getFileData("lists/vegan.txt");
     var vegetarian = await getFileData("lists/vegetarian.txt");
+
+    var allergies=["test"];
+    if(values["Soybeans"]==true)
+    allergies=(await getFileData("lists/allergens/soy.txt"));
+    if(values["Crustacean shellfish"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/shellfish.txt"))];
+    if(values["Peanuts"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/peanuts.txt"))];
+    if(values["Tree nuts"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/treenuts.txt"))];
+    if(values["Fish"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/fish.txt"))];
+    if(values["Wheat"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/wheat.txt"))];
+    if(values["Eggs"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/eggs.txt"))];
+    if(values["Milk"]==true)
+    allergies=[...allergies, ...(await getFileData("lists/allergens/shellfish.txt"))];
 
     for (TextBlock block in visionText.blocks)
       for (TextLine line in block.lines){
@@ -170,6 +201,13 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
                     break;
                   }
           }
+          for(String alle in allergies) {
+                  newStr = element.text.replaceAll(",", "").toLowerCase();
+                  if(newStr == alle)  {
+                    alleFlag = 1;
+                    break;
+                  }
+          }
           text=text+newStr+" ";
         }
       text=text+"\n";
@@ -187,24 +225,23 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       status = "The product is Vegan!";
       filegif = "gifs/veganPower.gif";}
 
+      if(alleFlag==1)
+      t="You are alergic to this";
+
         showDialog(
           context: context,
             builder: (_) => AssetGiffyDialog(
             image: Image.asset(filegif, fit: BoxFit.cover),
-            title: new Text(status,
+            title: new Text(status+" "+t,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 22.0,
-                fontWeight: FontWeight.w600),),
+                fontWeight: FontWeight.w600),
+                ),
             onlyCancelButton: true,
             buttonCancelText: Text("Ok", style: TextStyle(fontSize: 18.0)),
             buttonCancelColor: Colors.blue,
            ));
-
-
-
-
-
 /*showDialog(context: context,import 'package:giffy_dialog/giffy_dialog.dart';
       builder: (BuildContext context) {
         return AlertDialog(

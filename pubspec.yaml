@@ -53,6 +53,7 @@ flutter:
   assets:
     - images/
     - lists/
+    - lists/allergens/
     - gifs/
 
   # An image asset can refer to one or more resolution-specific "variants", see

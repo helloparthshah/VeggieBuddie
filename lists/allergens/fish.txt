@@ -1,0 +1,29 @@
+anchovy
+bass
+catfish
+cod
+flounder
+grouper
+haddock
+hake
+halibut
+herring
+mahi mahi
+perch
+pike
+pollock
+salmon
+snapper
+sole
+swordfish
+tilapia
+trout
+tuna
+walleye
+caesar dressing
+caesar salad
+bouillabaisse
+imitation crab
+fish stock
+seafood flavorings
+worcestershire sauce

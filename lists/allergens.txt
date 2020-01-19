@@ -1,0 +1,182 @@
+FISH
+    Anchovy
+    Bass
+    Catfish
+    Cod
+    Flounder
+    Grouper
+    Haddock
+    Hake
+    Halibut
+    Herring
+    Mahi Mahi
+    Perch
+    Pike
+    Pollock
+    Salmon
+    Snapper
+    Sole
+    Swordfish
+    Tilapia
+    Trout
+    Tuna
+    Walleye
+    Caesar dressing
+    Caesar salad
+    Bouillabaisse
+    Imitation crab
+    Fish stock
+    Seafood flavorings
+    Worcestershire sauce
+TREE NUT
+    Almond
+    Pecan
+    Chestnut
+    Walnut
+    Macadamia Nut
+    Cashew
+    Pistachio
+    Brazil Nut
+    Pine Nut
+    Pignolia Nut
+    Filbert
+    Hazelnut
+    Argan Nut
+    Beech Nut
+    Ginkgo
+    Shea Nut
+    Butter Nut
+    Hickory
+    Chinquapin
+    Lychee Nut
+    Coconut
+    Pili Nut
+MILK
+    Artificial Butter Flavor
+    Butter Fat
+    Butter Oil
+    Butter
+    Casein
+    Caseinates
+    Cheese
+    Cream
+    Curds
+    Custard
+    Ghee
+    Hydrolysates
+    Ice Cream
+    Lactalbumin
+    Lactalbumin Phosphate
+    Lactoglobulin
+    Lactoferrin
+    Lactulose
+    Milk
+    Nougat
+    Pudding
+    Rennet
+    Rennet Casein
+    Recaldent
+    Simpless
+    Whey
+    Yogurt
+PEANUT
+    Peanut
+EGG
+    Albumin
+    Egg
+    Egg Substitutes
+    Egg Nog
+    Egg Noodles
+    Globulin
+    Lysozyme
+    Mayonnaise
+    Meringue
+    Ovalbumin
+    Ovovitellin
+    Surimi
+WHEAT
+    Bread
+    Bread Crumbs
+    Bulgur
+    Cereal Extract
+    Couscous
+    Durum
+    Emmer Wheat
+    Einkorn Wheat
+    Farina
+    All-purpose Flour
+    Cake Flour
+    Enriched Flour
+    Graham Flour
+    High Gluten Flour
+    High Protein Flour
+    Pastry Flour
+    Wheat Flour
+    Flour
+    Kamut
+    Pasta
+    Semolina
+    Spelt
+    Sprouted Wheat
+    Triticale
+    Vital gluten
+    Bran Wheat
+    Germ Wheat
+    Gluten Wheat
+    Malt Wheat
+    Starch Wheat
+    Wheat
+    Whole Wheat Berries
+SOY
+    Soybean
+    Soy Protein
+    Soy Sauce
+    Soya
+    Edemame
+    Miso
+    Natto
+    Shoyu
+    Tofu
+    Tamari
+    Tempeh
+CRUSTACEAN SHELLFISH
+    Barnacle
+    Crab
+    Crawfish
+    Crayfish
+    Ecrevisse
+    Krill
+    Lobster
+    Langouste
+    Langousine
+    Scampi
+    Coral
+    Tomalley
+    Prawns
+    Shrimp
+    Crevette
+    Scampi
+    Abalone
+    Clams
+    Cherrystone
+    Littleneck
+    Pismo
+    Quahog
+    Cockle
+    Periwinkle
+    Sea urchin
+    Mollusks
+    Mussels
+    Octopus
+    Oysters
+    Scallops
+    Snails
+    Escargot
+    Squid
+    Calamari
+    Bouillabaisse
+    Fish Stock
+    Seafood Flavorings
+    Surimi
+SESAME
+    Sesame
