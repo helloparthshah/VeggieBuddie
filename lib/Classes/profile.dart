@@ -1,8 +1,7 @@
 class Profile{
   String name;
   String email;
-  List<String> allergies;
-  bool isVeg;
+  List<String> food;
 
-  Profile(this.name,this.email,this.allergies,this.isVeg);
+  Profile(this.name,this.email,this.food);
 }
