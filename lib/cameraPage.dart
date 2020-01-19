@@ -7,15 +7,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/services.dart';
 
-import 'package:giffy_dialog/giffy_dialog.dart';
-
 import 'package:flutter/services.dart' show rootBundle;
 
 List<CameraDescription> cameras;
 
 Future<List<String>> getFileData(String path) async {
   var readLines = await rootBundle.loadString(path);
-  return readLines.split("\\n");
+  return readLines.split("\n");
 }
 
 class FlutterVisionHome extends StatefulWidget {
@@ -148,10 +146,10 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     for (TextBlock block in visionText.blocks)
       for (TextLine line in block.lines){
         for (TextElement element in line.elements){
-
           for(String nonv in nonVeg){
                   newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr==nonv){
+                    print(nonv);
                         nvFlag=1;
                         break;
                     }
@@ -174,7 +172,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
         }
       text=text+"\n";
       }
-    String status="The product could not be detected!";
+    String status = "The product could not be detected!";
     if (nvFlag==1)
       status="The product is Non-Vegetarian!";
     else if(vegFlag == 1)
