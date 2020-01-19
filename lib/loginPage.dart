@@ -87,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () async {
-        signInWithGoogle().whenComplete(() {
-          createRecord();
+        await signInWithGoogle().whenComplete(() async{
+          await createRecord();
           runApp(Home());
         });
       },
