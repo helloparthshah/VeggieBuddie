@@ -5,14 +5,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
-String name;
-String email;
-String imageUrl;
+String name="Guest";
+String email="guest@veggiebuddie.com";
+String imageUrl="http://pluspng.com/img-png/google-logo-png-open-2000.png";
 
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-  final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
+  final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
 
   final AuthCredential credential = GoogleAuthProvider.getCredential(
     accessToken: googleSignInAuthentication.accessToken,
@@ -69,6 +68,10 @@ class _LoginPageState extends State<LoginPage> {
               Directionality(
               textDirection: TextDirection.ltr,
               child:_signInButton(),
+              ),
+              Directionality(
+              textDirection: TextDirection.ltr,
+              child:_signInAsGuestButton(),
               )
             ],
           ),
@@ -125,11 +128,10 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("images/google_logo.png"), height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign in with Google',
+                'Sign in as Guest',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.grey,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:VeggieBuddie/loginPage.dart';
+import 'package:VeggieBuddie/details.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -72,7 +73,15 @@ class Profile extends StatelessWidget {
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
-              )
+              ),
+              FloatingActionButton(
+                onPressed: () {  
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Details()),
+                );
+                },
+                )
             ],
           ),
         ),

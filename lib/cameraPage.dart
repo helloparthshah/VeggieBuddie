@@ -7,7 +7,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/services.dart';
 
+import 'package:flutter/services.dart' show rootBundle;
+
 List<CameraDescription> cameras;
+
+Future<String> getFileData(String path) async {
+  return await rootBundle.loadString(path);
+}
 
 class FlutterVisionHome extends StatefulWidget {
   @override
@@ -129,9 +135,10 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     /* String text = visionText.text; */
     String text="";
     int flag=0;
-    var nv={"carmine","carminic acid","cochineal","dripping","gelatin","hi-vegi-lip","hydrogenated tallow","isinglass","keratin","lard","lard oil","pancreatic extract","pancreatin","pepsin","pork fat","pork oil","suet","tallow","tallow flakes","trypsin"};
     String newStr;
-    
+    var nv={"lard","pork"};
+    var nonVeg=await getFileData("lists/non-veg.txt");
+    print(type(nonVeg));
     for (TextBlock block in visionText.blocks) 
     for (TextLine line in block.lines){
     for (TextElement element in line.elements){
@@ -146,7 +153,6 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       }
       text=text+"\n";
     }
-
     String status="The product is Vegetarian!";
     if (flag==1)
     status="The product is Non-Vegetarian!";
