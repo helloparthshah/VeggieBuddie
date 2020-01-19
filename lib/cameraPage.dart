@@ -157,7 +157,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     int vegFlag = 0;
     int alleFlag=0;
     String newStr;
-    String t="Safe to eat for you!";
+    String t="";
     var nonVeg=await getFileData("lists/non-veg.txt");
     var vegan = await getFileData("lists/vegan.txt");
     var vegetarian = await getFileData("lists/vegetarian.txt");
@@ -217,18 +217,26 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       text=text+"\n";
       }
     String status = "The ingredients could not be detected!";
+    int x=1;
       String filegif = "gifs/notfound.gif";
     if (nvFlag==1) {
       status="The product is Non-Vegetarian!";
       filegif = "gifs/nonveg.gif";
+      x=0;
     }
     else if(vegFlag == 1){
       status = "The product is Vegetarian!";
-      filegif = "gifs/vegetarians.gif"; }
+      filegif = "gifs/vegetarians.gif"; 
+      x=0;
+      }
     else if(veganFlag == 1){
       status = "The product is Vegan!";
-      filegif = "gifs/veganPower.gif";}
+      filegif = "gifs/veganPower.gif";
+      x=0;
+      }
 
+      if(x==0)
+      t="Safe to eat for you!";
       if(alleFlag==1)
       t="You are allergic to this!";
 

@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
+int flag=0;
+
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 String name;
@@ -139,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         name = "Guest";
         email = "guest@veggiebuddie.com";
+        flag=1;
         await createRecord();
         runApp(Home());
       },
