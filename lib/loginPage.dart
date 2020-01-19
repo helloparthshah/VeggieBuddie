@@ -156,7 +156,6 @@ class _LoginPageState extends State<LoginPage> {
       databaseReference.child(name).update({
           'name': name,
           'email': email,
-          
     });
   }
 }
