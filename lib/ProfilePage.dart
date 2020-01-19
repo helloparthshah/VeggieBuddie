@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 Map<String, bool> values = {
     'Soybeans': false,
     'Crustacean shellfish': false,
@@ -49,8 +51,9 @@ class ProfilePage extends State<Profile> {
       print("Loading...");
     }
     return Stack(children: <Widget>[
-      Container(
-          child: Container(
+      Scaffold(
+        key: _scaffoldKey,
+          body: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
@@ -149,7 +152,7 @@ class ProfilePage extends State<Profile> {
                               onPressed: () async {
                                 await createRecord();
                               },
-                              child: Icon(Icons.add),
+                              child: Icon(Icons.check),
                             ),
                           ))
                     ]))
@@ -159,5 +162,6 @@ class ProfilePage extends State<Profile> {
 
   Future createRecord() async {
     databaseReference.child(name).update({'food': values});
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Changes saved!")));
   }
 }

@@ -157,7 +157,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     int vegFlag = 0;
     int alleFlag=0;
     String newStr;
-    String t="";
+    String t="Safe to eat for you!";
     var nonVeg=await getFileData("lists/non-veg.txt");
     var vegan = await getFileData("lists/vegan.txt");
     var vegetarian = await getFileData("lists/vegetarian.txt");
@@ -230,13 +230,13 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       filegif = "gifs/veganPower.gif";}
 
       if(alleFlag==1)
-      t="You are alergic to this!";
+      t="You are allergic to this!";
 
         showDialog(
           context: context,
             builder: (_) => AssetGiffyDialog(
             image: Image.asset(filegif, fit: BoxFit.cover),
-            title: new Text(status+"\n"+t,
+            title: new Text(status+"\n\n"+t,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 22.0,
