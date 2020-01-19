@@ -172,7 +172,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
         }
       text=text+"\n";
       }
-    String status = "The product could not be detected!";
+    String status = "The ingredients could not be detected!";
     if (nvFlag==1)
       status="The product is Non-Vegetarian!";
     else if(vegFlag == 1)
