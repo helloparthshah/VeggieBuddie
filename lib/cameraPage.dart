@@ -7,6 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/services.dart';
 
+import 'package:giffy_dialog/giffy_dialog.dart';
+
 import 'package:flutter/services.dart' show rootBundle;
 
 List<CameraDescription> cameras;
@@ -135,30 +137,74 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     final VisionText visionText = await textRecognizer.processImage(visionImage);
     /* String text = visionText.text; */
     String text="";
-    int flag=0;
+    int nv_flag=0;
+    int vegan_f = 0;
+    int veg_f = 0;
     String newStr;
     var nonVeg=await getFileData("lists/non-veg.txt");
-    print(nonVeg);
-    for (TextBlock block in visionText.blocks) 
-    for (TextLine line in block.lines){
-    for (TextElement element in line.elements){
-      for(String nonv in nonVeg){
-        newStr = element.text.replaceAll(",", "").toLowerCase();
-      if(newStr==nonv){
-        flag=1;
-        break;
-      }
-      }
-      text=text+newStr+" ";
-      }
-      text=text+"\n";
-    }
-    String status="The product is Vegetarian!";
-    if (flag==1)
-    status="The product is Non-Vegetarian!";
+    var vegan = await getFileData("lists/vegan.txt");
+    var vegetarian = await getFileData("lists/vegetarian.txt");
 
-    showDialog(
-      context: context,
+    for (TextBlock block in visionText.blocks)
+      for (TextLine line in block.lines){
+        for (TextElement element in line.elements){
+
+          for(String nonv in nonVeg){
+                  newStr = element.text.replaceAll(",", "").toLowerCase();
+                  if(newStr==nonv){
+                        nv_flag=1;
+                        break;
+                    }
+          }
+          for(String veg in vegetarian) {
+                  newStr = element.text.replaceAll(",", "").toLowerCase();
+                  if(newStr == veg) {
+                    veg_f = 1;
+                    break;
+                  }
+          }
+          for(String vega in vegan) {
+                  newStr = element.text.replaceAll(",", "").toLowerCase();
+                  if(newStr == vega)  {
+                    vegan_f = 1;
+                    break;
+                  }
+          }
+          text=text+newStr+" ";
+        }
+      text=text+"\n";
+      }
+    String status="The product could not be detected!";
+    if (nv_flag==1)
+      status="The product is Non-Vegetarian!";
+    else if(veg_f == 1)
+      status = "The product is Vegetarian!";
+    else if(vegan_f == 1)
+      status = "The product is Vegan!";
+
+ /*       showDialog(
+          context: context,
+            builder: (_) => AssetGiffyDialog(
+            imagePath:"https://raw.githubusercontent.com/Shashank02051997/
+            FancyGifDialog-Android/master/GIF's/gif14.gif",
+            title: new Text(status,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.w600),)
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Close"),
+                onPressed: () {
+                    Navigator.of(context).pop();
+  },
+        ),
+            ]),
+          )
+*/
+
+
+showDialog(context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text(status),

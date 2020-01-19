@@ -24,6 +24,7 @@ dependencies:
   firebase_auth: ^0.15.3+1
   google_sign_in: ^4.1.1
   firebase_database: ^3.1.1
+  giffy_dialog: ^1.7.0
 
   flutter:
     sdk: flutter
