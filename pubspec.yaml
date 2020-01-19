@@ -53,9 +53,7 @@ flutter:
   assets:
     - images/
     - lists/
-    - gifs/nonveg.gif
-    - gifs/veganPower.gif
-    - gifs/vegetarians.gif
+    - gifs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

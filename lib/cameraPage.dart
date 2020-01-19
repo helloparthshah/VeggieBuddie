@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/services.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:VeggieBuddie/homePage.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -174,7 +175,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
       text=text+"\n";
       }
     String status = "The ingredients could not be detected!";
-      String filegif = "";
+      String filegif = "gifs/notfound.gif";
     if (nvFlag==1) {
       status="The product is Non-Vegetarian!";
       filegif = "gifs/nonveg.gif";
@@ -195,8 +196,10 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
             style: TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.w600),),
-            onlyOkButton: true,
-           onOkButtonPressed: () {}));
+            onlyCancelButton: true,
+            buttonCancelText: Text("Ok"),
+            buttonCancelColor: Colors.green,
+           ));
 
 
 
