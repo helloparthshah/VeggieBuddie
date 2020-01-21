@@ -4,19 +4,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:VeggieBuddie/cameraPage.dart';
+import 'package:camera/camera.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
-
-int flag=0;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 String name;
 String email;
+String index;
 String imageUrl = "http://pluspng.com/img-png/google-logo-png-open-2000.png";
 
 Future<String> signInWithGoogle() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    cameras = await availableCameras();
+    print("Cameras found");
+  } on CameraException catch (e) {
+    logError(e.code, e.description);
+  }
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
@@ -46,12 +53,19 @@ Future<String> signInWithGoogle() async {
     name = name.substring(0, name.indexOf(" "));
   }
 
+  if (email.contains("@")) {
+    index = email.substring(0, email.indexOf("@"));
+  }
+
   return 'signInWithGoogle succeeded: $user';
 }
 
-void signOutGoogle() async {
-  await googleSignIn.signOut();
-  print("User Sign Out");
+Future signOutGoogle() async {
+  googleSignIn.signOut();
+  print("User Signed Out");
+  name="";
+  email="";
+  imageUrl = "http://pluspng.com/img-png/google-logo-png-open-2000.png";
 }
 
 class LoginPage extends StatefulWidget {
@@ -107,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
         await signInWithGoogle().whenComplete(() async{
           await createRecord();
           runApp(Home());
+          print("Signing in...");
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
@@ -141,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         name = "Guest";
         email = "guest@veggiebuddie.com";
-        flag=1;
+        index = "guest";
         await createRecord();
         runApp(Home());
       },
@@ -171,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future createRecord() async {
-      databaseReference.child(name).update({
+      databaseReference.child(index).update({
           'name': name,
           'email': email,
     });

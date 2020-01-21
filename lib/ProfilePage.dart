@@ -48,7 +48,7 @@ class ProfilePage extends State<Profile> {
   Widget build(BuildContext context) {
     if(_result==null)
     {
-      print("Loading...");
+      print("Fetching");
     }
     return Stack(children: <Widget>[
       Scaffold(
@@ -108,10 +108,11 @@ class ProfilePage extends State<Profile> {
                     RaisedButton(
                       onPressed: () {
                         signOutGoogle();
-                        Navigator.of(context).pushAndRemoveUntil(
+                        /* Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (context) {
                           return LoginPage();
-                        }), ModalRoute.withName('/'));
+                        }), ModalRoute.withName('/')); */
+                        runApp(LoginPage());
                       },
                       color: Colors.deepPurple,
                       child: Padding(
@@ -161,7 +162,7 @@ class ProfilePage extends State<Profile> {
   }
 
   Future createRecord() async {
-    databaseReference.child(name).update({'food': values});
+    databaseReference.child(index).update({'food': values});
     _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Changes saved!")));
   }
 }

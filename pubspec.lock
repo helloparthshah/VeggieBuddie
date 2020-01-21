@@ -134,6 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.3+5"
+  firebase_mlkit_language:
+    dependency: "direct main"
+    description:
+      name: firebase_mlkit_language
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   flare_dart:
     dependency: transitive
     description:
@@ -177,13 +184,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  google_fonts:
-    dependency: "direct main"
-    description:
-      name: google_fonts
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2"
   google_sign_in:
     dependency: "direct main"
     description:

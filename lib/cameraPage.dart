@@ -10,13 +10,14 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:VeggieBuddie/loginPage.dart';
 import 'package:VeggieBuddie/ProfilePage.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_mlkit_language/firebase_mlkit_language.dart';
 
 import 'package:flutter/services.dart' show DeviceOrientation, rootBundle;
 
 Future test() async{
   final databaseReference = FirebaseDatabase.instance.reference();
   databaseReference.once().then((DataSnapshot snapshot) {
-      values=Map<String,bool>.from(snapshot.value[name]['food']);
+      values=Map<String,bool>.from(snapshot.value[index]['food']);
     });
 }
 
@@ -149,8 +150,20 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
 
   Future<void> detectLabels() async {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFilePath(imagePath);
-    final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
+    final TextRecognizer textRecognizer = FirebaseVision.instance.cloudTextRecognizer();
     final VisionText visionText = await textRecognizer.processImage(visionImage);
+    final LanguageIdentifier languageIdentifier = FirebaseLanguage.instance.languageIdentifier();
+
+    final List<LanguageLabel> labels = await languageIdentifier.processText('Sample Text');
+
+    for (LanguageLabel label in labels) {
+      final String text = label.languageCode;
+      final double confidence = label.confidence;
+      print(text+" "+confidence.toString());
+    }
+
+    print(visionText.text);
+
     String text="";
     int nvFlag=0;
     int veganFlag = 0;
@@ -289,6 +302,7 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
 class FlutterVisionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("Cam");
     return MaterialApp(
       home: FlutterVisionHome(),
     );

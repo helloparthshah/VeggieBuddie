@@ -3,9 +3,14 @@ import 'package:VeggieBuddie/cameraPage.dart';
 import 'package:VeggieBuddie/ProfilePage.dart';
 import 'package:flutter/services.dart';
 
+void main(){
+  runApp(Home());
+}
+
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("App started");
     SystemChrome.setEnabledSystemUIOverlays([]);
     return new MaterialApp(
       color: Colors.yellow,
