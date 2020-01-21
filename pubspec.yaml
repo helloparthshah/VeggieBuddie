@@ -25,7 +25,7 @@ dependencies:
   google_sign_in: ^4.1.1
   firebase_database: ^3.1.1
   giffy_dialog: ^1.7.0
-  firebase_mlkit_language: ^1.1.2
+  translator: ^0.1.4
 
   flutter:
     sdk: flutter

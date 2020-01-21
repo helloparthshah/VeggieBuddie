@@ -10,7 +10,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:VeggieBuddie/loginPage.dart';
 import 'package:VeggieBuddie/ProfilePage.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_mlkit_language/firebase_mlkit_language.dart';
+import 'package:translator/translator.dart';
 
 import 'package:flutter/services.dart' show DeviceOrientation, rootBundle;
 
@@ -152,17 +152,24 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFilePath(imagePath);
     final TextRecognizer textRecognizer = FirebaseVision.instance.cloudTextRecognizer();
     final VisionText visionText = await textRecognizer.processImage(visionImage);
-    final LanguageIdentifier languageIdentifier = FirebaseLanguage.instance.languageIdentifier();
+    final translator = new GoogleTranslator();
 
-    final List<LanguageLabel> labels = await languageIdentifier.processText('Sample Text');
+    print("Text read:"+visionText.text);
 
-    for (LanguageLabel label in labels) {
-      final String text = label.languageCode;
-      final double confidence = label.confidence;
-      print(text+" "+confidence.toString());
+    var lang,translated;
+
+    for (TextBlock block in visionText.blocks) {
+      List<RecognizedLanguage> languages = block.recognizedLanguages;
+      for(RecognizedLanguage language in languages){
+      print(language.languageCode);
+      lang=language.languageCode;
+      }
     }
 
-    print(visionText.text);
+    translator.translate(visionText.text, from: lang, to: 'en').then((s) {
+      print("Output:"+s);
+      translated=s;
+    });
 
     String text="";
     int nvFlag=0;
@@ -196,8 +203,19 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     for (TextBlock block in visionText.blocks)
       for (TextLine line in block.lines){
         for (TextElement element in line.elements){
+          newStr = element.text.replaceAll(",", "").toLowerCase();
+          List<RecognizedLanguage> languages = block.recognizedLanguages;
+          for(RecognizedLanguage language in languages){
+            print(language.languageCode);
+            lang=language.languageCode;
+            }
+
+            await translator.translate(newStr, from: lang, to: 'en').then((s) {
+              print("Output: "+s.toLowerCase());
+              newStr=s;
+            });
+            print("next");
           for(String nonv in nonVeg){
-                  newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr==nonv){
                     print(nonv);
                         nvFlag=1;
@@ -205,21 +223,18 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
                     }
           }
           for(String veg in vegetarian) {
-                  newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr == veg) {
                     vegFlag = 1;
                     break;
                   }
           }
           for(String vega in vegan) {
-                  newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr == vega)  {
                     veganFlag = 1;
                     break;
                   }
           }
           for(String alle in allergies) {
-                  newStr = element.text.replaceAll(",", "").toLowerCase();
                   if(newStr == alle)  {
                     alleFlag = 1;
                     break;
