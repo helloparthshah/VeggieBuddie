@@ -158,19 +158,6 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
 
     var lang,translated;
 
-    for (TextBlock block in visionText.blocks) {
-      List<RecognizedLanguage> languages = block.recognizedLanguages;
-      for(RecognizedLanguage language in languages){
-      print(language.languageCode);
-      lang=language.languageCode;
-      }
-    }
-
-    translator.translate(visionText.text, from: lang, to: 'en').then((s) {
-      print("Output:"+s);
-      translated=s;
-    });
-
     String text="";
     int nvFlag=0;
     int veganFlag = 0;
@@ -200,21 +187,25 @@ class _FlutterVisionHomeState extends State<FlutterVisionHome> {
     if(values["Milk"]==true)
     allergies=[...allergies, ...(await getFileData("lists/allergens/shellfish.txt"))];
 
+    for (TextBlock block in visionText.blocks){
+    List<RecognizedLanguage> languages = block.recognizedLanguages;
+        for(RecognizedLanguage language in languages){
+            print(language.languageCode);
+            lang=language.languageCode;
+            break;
+            }
+    }
+
     for (TextBlock block in visionText.blocks)
       for (TextLine line in block.lines){
         for (TextElement element in line.elements){
           newStr = element.text.replaceAll(",", "").toLowerCase();
-          List<RecognizedLanguage> languages = block.recognizedLanguages;
-          for(RecognizedLanguage language in languages){
-            print(language.languageCode);
-            lang=language.languageCode;
-            }
 
-            await translator.translate(newStr, from: lang, to: 'en').then((s) {
+            translator.translate(newStr, from: lang, to: 'en').then((s) {
+              if(s!=null){
               print("Output: "+s.toLowerCase());
-              newStr=s;
+              newStr=s.toLowerCase();}
             });
-            print("next");
           for(String nonv in nonVeg){
                   if(newStr==nonv){
                     print(nonv);
